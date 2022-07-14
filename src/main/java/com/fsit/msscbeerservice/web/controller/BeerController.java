@@ -4,7 +4,6 @@ import com.fsit.msscbeerservice.services.BeerService;
 import com.fsit.msscbeerservice.web.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,18 +30,12 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity<String> handlePost(@Valid @RequestBody BeerDto beerDto) {
-        BeerDto savedDto = beerService.saveNewBeer(beerDto);
-
-        HttpHeaders headers = new HttpHeaders();
-
-        headers.add("Location", "/api/v1/beer/" + savedDto.getId().toString());
-
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    public ResponseEntity<BeerDto> saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
+        return new ResponseEntity<>(beerService.saveNewBeer(beerDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity<String> handleUpdate(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
+    public ResponseEntity<String> updateBeer(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
 
         beerService.updateBeer(beerId, beerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
