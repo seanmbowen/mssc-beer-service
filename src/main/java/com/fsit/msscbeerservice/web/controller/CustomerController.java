@@ -3,7 +3,7 @@ package com.fsit.msscbeerservice.web.controller;
 import com.fsit.msscbeerservice.services.CustomerService;
 import com.fsit.msscbeerservice.web.model.CustomerDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RequestMapping("/api/v1/customer")
 @RestController
-@Log4j2
+@Slf4j
 @RequiredArgsConstructor
 public class CustomerController {
 

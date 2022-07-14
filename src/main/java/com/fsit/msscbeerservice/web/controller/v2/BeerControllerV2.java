@@ -3,7 +3,7 @@ package com.fsit.msscbeerservice.web.controller.v2;
 import com.fsit.msscbeerservice.services.v2.BeerServiceV2;
 import com.fsit.msscbeerservice.web.model.v2.BeerDtoV2;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v2/beer")
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class BeerControllerV2 {
 
     private final BeerServiceV2 beerService;
@@ -30,17 +30,19 @@ public class BeerControllerV2 {
 
     @PostMapping
     public ResponseEntity<String> handlePost(@RequestBody BeerDtoV2 beerDto) {
+        log.debug("In handle post method...");
         BeerDtoV2 savedDto = beerService.saveNewBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
 
-        headers.add("Location", "/api/v1/beer/" + savedDto.getId().toString());
+        headers.add("Location", "/api/v2/beer/" + savedDto.getId().toString());
 
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
     public ResponseEntity<String> handleUpdate(@PathVariable("beerId") UUID beerId, @RequestBody BeerDtoV2 beerDto) {
+        log.debug("In handle update method...");
 
         beerService.updateBeer(beerId, beerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -49,6 +51,7 @@ public class BeerControllerV2 {
     @DeleteMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBeer(@PathVariable("beerId") UUID beerId, @RequestBody BeerDtoV2 beerDto) {
+        log.debug("In handle delete method...");
         beerService.deleteById(beerId);
     }
 }

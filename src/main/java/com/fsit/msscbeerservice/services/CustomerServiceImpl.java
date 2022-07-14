@@ -1,7 +1,7 @@
 package com.fsit.msscbeerservice.services;
 
 import com.fsit.msscbeerservice.web.model.CustomerDto;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -11,7 +11,7 @@ import java.util.UUID;
  * Architecting Solutions. Simply.
  */
 @Service
-@Log4j2
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto getCustomerById(UUID customerId) {

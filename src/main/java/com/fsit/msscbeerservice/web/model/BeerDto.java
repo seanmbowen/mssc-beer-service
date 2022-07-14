@@ -39,7 +39,7 @@ public class BeerDto {
     private String beerName;
 
     @NotNull
-    private String beerStyle;
+    private BeerStyle beerStyle;
 
     @Positive
     @NotNull

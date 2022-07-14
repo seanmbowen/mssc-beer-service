@@ -1,5 +1,6 @@
 package com.fsit.msscbeerservice.domain;
 
+import com.fsit.msscbeerservice.web.model.BeerStyle;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -39,7 +40,7 @@ public class Beer {
     private Timestamp lastModifiedDate;
 
     private String beerName;
-    private String beerStyle;
+    private BeerStyle beerStyle;
 
     @Column(unique = true)
     private Long upc;

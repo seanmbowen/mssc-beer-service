@@ -1,9 +1,11 @@
 package com.fsit.msscbeerservice.services;
 
 import com.fsit.msscbeerservice.web.model.BeerDto;
-import lombok.extern.log4j.Log4j2;
+import com.fsit.msscbeerservice.web.model.BeerStyle;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
@@ -11,13 +13,17 @@ import java.util.UUID;
  * Architecting Solutions. Simply.
  */
 @Service
-@Log4j2
+@Slf4j
 @Deprecated(since = "2.0.0")
 public class BeerServiceImpl implements BeerService {
     @Override
     public BeerDto getBeerById(UUID beerId) {
-        return BeerDto.builder().id(UUID.randomUUID()).beerName("Galaxy Cat")
-                .beerStyle("Pale Ale").upc(12345L).build();
+        return BeerDto.builder().id(UUID.randomUUID())
+                .beerName("Galaxy Cat")
+                .beerStyle(BeerStyle.ALE)
+                .upc(12345L).version(1)
+                .price(new BigDecimal("123"))
+                .quantityOnHand(100).build();
     }
 
     @Override

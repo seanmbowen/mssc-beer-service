@@ -3,7 +3,7 @@ package com.fsit.msscbeerservice.web.controller;
 import com.fsit.msscbeerservice.services.BeerService;
 import com.fsit.msscbeerservice.web.model.BeerDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/beer")
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 @Deprecated(since = "2.0.0")
 public class BeerController {
 
