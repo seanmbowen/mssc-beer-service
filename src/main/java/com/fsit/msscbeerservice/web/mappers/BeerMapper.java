@@ -14,4 +14,6 @@ public interface BeerMapper {
     BeerDto beerToBeerDto(Beer beer);
 
     Beer beerDtoToBeer(BeerDto beerDto);
+
+    Iterable<BeerDto> beerToBeerDtoList(Iterable<Beer> beer);
 }

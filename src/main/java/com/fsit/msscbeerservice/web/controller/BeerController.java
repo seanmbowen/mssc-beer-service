@@ -26,6 +26,12 @@ public class BeerController {
 
     private final BeerService beerService;
 
+    @GetMapping
+    @Operation(summary = "Get beer record from database")
+    public ResponseEntity<Iterable<BeerDto>> getAllBeers() {
+        return new ResponseEntity<>(beerService.getAllBeers(), HttpStatus.OK);
+    }
+
     @GetMapping("/{beerId}")
     @Operation(summary = "Get beer record from database")
     public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") UUID beerId) {

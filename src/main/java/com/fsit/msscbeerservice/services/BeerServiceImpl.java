@@ -1,11 +1,13 @@
 package com.fsit.msscbeerservice.services;
 
+import com.fsit.msscbeerservice.exception.NotFoundException;
+import com.fsit.msscbeerservice.repositories.BeerRepository;
+import com.fsit.msscbeerservice.web.mappers.BeerMapper;
 import com.fsit.msscbeerservice.web.model.BeerDto;
-import com.fsit.msscbeerservice.web.model.BeerStyle;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
@@ -14,22 +16,25 @@ import java.util.UUID;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class BeerServiceImpl implements BeerService {
+
+    private final BeerRepository beerRepository;
+    private final BeerMapper beerMapper;
+
     @Override
+
     public BeerDto getBeerById(UUID beerId) {
-        return BeerDto.builder().id(UUID.randomUUID())
-                .beerName("Galaxy Cat")
-                .beerStyle(BeerStyle.ALE)
-                .upc(12345L).version(1)
-                .price(new BigDecimal("123"))
-                .quantityOnHand(100).build();
+        log.debug("Searching for beer: {}", beerId);
+        return beerMapper
+                .beerToBeerDto(beerRepository
+                        .findById(beerId)
+                        .orElseThrow(NotFoundException::new));
     }
 
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
-        return BeerDto.builder()
-                .id(UUID.randomUUID())
-                .build();
+        return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDto)));
     }
 
     @Override
@@ -40,5 +45,10 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public void deleteById(UUID beerId) {
         log.debug("Deleting beer {} from database", beerId);
+    }
+
+    @Override
+    public Iterable<BeerDto> getAllBeers() {
+        return beerMapper.beerToBeerDtoList(beerRepository.findAll());
     }
 }

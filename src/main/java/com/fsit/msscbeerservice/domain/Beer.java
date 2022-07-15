@@ -30,7 +30,7 @@ public class Beer {
     private UUID id;
 
     @Version
-    private Long version;
+    private Long version = 1L;
 
     @CreationTimestamp
     @Column(updatable = false)

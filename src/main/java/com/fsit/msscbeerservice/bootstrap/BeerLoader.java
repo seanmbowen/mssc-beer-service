@@ -45,6 +45,10 @@ public class BeerLoader implements CommandLineRunner {
                     .build());
         }
 
-        log.info("Beers loaded: {}", beerRepository.count());
+        Iterable<Beer> beerList = beerRepository.findAll();
+
+        for (Beer beer : beerList) {
+            log.info("Beer ID from DB: {}", beer.getId());
+        }
     }
 }
