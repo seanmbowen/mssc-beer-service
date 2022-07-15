@@ -8,7 +8,6 @@ import java.util.UUID;
  * Created by: seanbowen on 2022-05-12
  * Architecting Solutions. Simply.
  */
-@Deprecated(since = "2.0.0")
 public interface BeerService {
     BeerDto getBeerById(UUID beerId);
 

@@ -14,7 +14,6 @@ import java.util.UUID;
  */
 @Service
 @Slf4j
-@Deprecated(since = "2.0.0")
 public class BeerServiceImpl implements BeerService {
     @Override
     public BeerDto getBeerById(UUID beerId) {

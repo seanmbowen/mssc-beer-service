@@ -19,7 +19,6 @@ import java.util.UUID;
 @RequestMapping("/api/v1/beer")
 @RequiredArgsConstructor
 @Slf4j
-@Deprecated(since = "2.0.0")
 public class BeerController {
 
     private final BeerService beerService;
