@@ -1,6 +1,7 @@
 package com.fsit.msscbeerservice.web.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fsit.msscbeerservice.bootstrap.BeerLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 
@@ -24,7 +25,7 @@ public class BaseTest {
                 .id(UUID.randomUUID())
                 .beerStyle(BeerStyle.LAGER)
                 .price(new BigDecimal("12.99"))
-                .upc(12342344L)
+                .upc(BeerLoader.BEER_1_UPC)
                 .version(1)
                 .createdDate(OffsetDateTime.now())
                 .lastModifiedDate(OffsetDateTime.now())
