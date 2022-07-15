@@ -51,4 +51,13 @@ public class BeerServiceImpl implements BeerService {
     public Iterable<BeerDto> getAllBeers() {
         return beerMapper.beerToBeerDtoList(beerRepository.findAll());
     }
+
+    @Override
+    public BeerDto getBeerByUpc(String upc) {
+        log.debug("Searching for beer using upc: {}", upc);
+        return beerMapper
+                .beerToBeerDto(beerRepository
+                        .findByUpc(upc)
+                        .orElseThrow(NotFoundException::new));
+    }
 }

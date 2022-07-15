@@ -38,6 +38,12 @@ public class BeerController {
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
     }
 
+    @GetMapping("/upc/{upc}")
+    @Operation(summary = "Get beer record from database")
+    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc) {
+        return new ResponseEntity<>(beerService.getBeerByUpc(upc), HttpStatus.OK);
+    }
+
     @PostMapping
     @Operation(summary = "Create new beer record in database")
     public ResponseEntity<BeerDto> saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
