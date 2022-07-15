@@ -23,7 +23,7 @@ class BeerDtoKebabTest extends BaseTest {
 
     @Test
     void testDeserializeDto() throws Exception {
-        String json = "{\"id\":\"e2916a48-730a-4f98-9e6c-5f9a4f163325\",\"version\":1,\"created-date\":\"2022-07-15T13:54:30.824772-04:00\",\"last-modified-date\":\"2022-07-15T13:54:30.830497-04:00\",\"beer-name\":\"Heineken\",\"beer-style\":\"LAGER\",\"upc\":12342344,\"price\":12.99,\"quantity-on-hand\":200}";
+        String json = "{\"id\":\"ca9b7a66-d06b-4119-b684-006d1b71b25b\",\"version\":1,\"created-date\":\"2022-07-15T15:26:23-0400\",\"last-modified-date\":\"2022-07-15T15:26:23-0400\",\"beer-name\":\"Heineken\",\"beer-style\":\"LAGER\",\"upc\":12342344,\"price\":\"12.99\",\"quantity-on-hand\":200}";
 
         BeerDto beerDto = object.readValue(json, BeerDto.class);
         log.info(beerDto.toString());
