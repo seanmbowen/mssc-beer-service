@@ -52,10 +52,10 @@ public class BeerController {
 
     @PutMapping("/{beerId}")
     @Operation(summary = "Update existing beer record in database")
-    public ResponseEntity<String> updateBeer(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
+    public ResponseEntity<BeerDto> updateBeer(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
 
         beerService.updateBeer(beerId, beerDto);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(beerService.updateBeer(beerId, beerDto), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{beerId}")

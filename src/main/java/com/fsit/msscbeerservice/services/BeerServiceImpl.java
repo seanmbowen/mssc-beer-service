@@ -1,5 +1,6 @@
 package com.fsit.msscbeerservice.services;
 
+import com.fsit.msscbeerservice.domain.Beer;
 import com.fsit.msscbeerservice.exception.NotFoundException;
 import com.fsit.msscbeerservice.repositories.BeerRepository;
 import com.fsit.msscbeerservice.web.mappers.BeerMapper;
@@ -34,17 +35,27 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
+        log.debug("Saving beer: {}", beerDto.getId());
         return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDto)));
     }
 
     @Override
-    public void updateBeer(UUID beerId, BeerDto beerDto) {
+    public BeerDto updateBeer(UUID beerId, BeerDto beerDto) {
         log.debug("Updating beer: {}", beerId);
+
+        Beer beer = beerRepository.findById(beerId).orElseThrow(NotFoundException::new);
+        beer.setBeerName(beerDto.getBeerName());
+        beer.setBeerStyle(beerDto.getBeerStyle());
+        beer.setPrice(beerDto.getPrice());
+        beerDto.setUpc(beerDto.getUpc());
+
+        return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDto)));
     }
 
     @Override
     public void deleteById(UUID beerId) {
         log.debug("Deleting beer {} from database", beerId);
+        beerRepository.deleteById(beerId);
     }
 
     @Override
